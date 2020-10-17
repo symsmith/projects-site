@@ -1,2 +1,2 @@
 # todo-svelte
- Simple Todo App made with Svelte, to apply what I learned.
+ Simple Todo App made with [Svelte](https://svelte.dev), to apply what I learned.

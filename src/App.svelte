@@ -2,6 +2,7 @@
     let currentValue = '';
 	let tasks = [];
 	$: numberUnchecked = tasks.filter(task => task.checked === false).length;
+    $: numberChecked = tasks.length - numberUnchecked
 
 	function findIdByAttr(arr, attr, value) {
 		let i = arr.length;
@@ -39,8 +40,13 @@
 	<form>
 		<input required type="text" name="newtask" id="newtask" placeholder="New Task" bind:value={currentValue}>
 		<br>
-		<button type="submit" on:click|preventDefault={addTask}>Add</button>
-		<button on:click|preventDefault={removeAllChecked}>Remove all selected</button>
+		<button
+			type="submit"
+			on:click|preventDefault={addTask}
+			disabled={currentValue === ""}>Add</button>
+		<button
+			on:click|preventDefault={removeAllChecked}
+			disabled={numberChecked === 0}>Remove selected tasks</button>
 	</form>
 
 	{#if tasks.length === 0}

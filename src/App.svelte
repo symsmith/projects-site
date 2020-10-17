@@ -1,17 +1,19 @@
 <script>
-	let currentValue = '';
+    let currentValue = '';
 	let tasks = [];
+	$: numberUnchecked = tasks.filter(task => task.checked === false).length;
 
-	function toggleCheckByAttr(arr, attr, value) {
+	function findIdByAttr(arr, attr, value) {
 		let i = arr.length;
+		let found;
 		while(i--){
 			if( arr[i] 
 				&& arr[i].hasOwnProperty(attr) 
 				&& (arguments.length > 2 && arr[i][attr] === value ) ) {
-				    arr[i].checked = !arr[i].checked;
+				    found = i;
 			}
 		}
-		return arr;
+		return found;
 	}
 	function addTask(e) {
 		if (currentValue !== '') {
@@ -23,8 +25,12 @@
 		}
 	}
 	function checkTask(i) {
-		toggleCheckByAttr(tasks, 'id', i);
+		let idInArray = findIdByAttr(tasks, 'id', i);
+		tasks[idInArray].checked = !tasks[idInArray].checked;
 		tasks = tasks;
+	}
+	function removeAllChecked() {
+		tasks = tasks.filter(task => task.checked === false);
 	}
 </script>
 
@@ -32,18 +38,24 @@
 	<h1>To-do</h1>
 	<form>
 		<input required type="text" name="newtask" id="newtask" placeholder="New Task" bind:value={currentValue}>
-
+		<br>
 		<button type="submit" on:click|preventDefault={addTask}>Add</button>
+		<button on:click|preventDefault={removeAllChecked}>Remove all selected</button>
 	</form>
 
-	<h2>Tasks:</h2>
 	{#if tasks.length === 0}
 		<p>No task yet…</p>
+	{:else}
+		{#if numberUnchecked === 0}
+			<h2>All done!</h2>
+		{:else}
+			<h2>{numberUnchecked} {numberUnchecked === 1 ? "Task" : "Tasks"}</h2>
+		{/if}
 	{/if}
 	<ul>
 	{#each tasks as {id, value, checked}}
-		<li>
-			<span class="check" on:click={checkTask(id)}>{checked ? "☑" : ""}</span> 
+		<li on:click={checkTask(id)}>
+			<span class="check">{checked ? "☑" : ""}</span> 
 			<span style={checked ? "text-decoration: line-through" : ""}>{value}</span>
 		</li> 
 	{/each}
@@ -54,8 +66,12 @@
 	main {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
+		width: 30%;
 		margin: 0 auto;
+	}
+
+	input {
+		width: 300px;
 	}
 
 	h1 {

@@ -73,6 +73,7 @@
 		text-align: center;
 		padding: 1em;
 		width: 30%;
+		min-width: 300px;
 		margin: 0 auto;
 	}
 

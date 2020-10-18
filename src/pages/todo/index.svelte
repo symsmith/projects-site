@@ -73,12 +73,12 @@
 
 <div class="section">
     {#if tasks.length === 0}
-        <h2 class="subtitle">No task yet…</h2>
+        <h3 class="subtitle">No task yet…</h3>
     {:else}
         {#if numberUnchecked === 0}
-            <h2 class="subtitle">All done!</h2>
+            <h3 class="subtitle">All done!</h3>
         {:else}
-            <h2 class="subtitle">{numberUnchecked} {numberUnchecked === 1 ? "Task" : "Tasks"}</h2>
+            <h3 class="subtitle">{numberUnchecked} {numberUnchecked === 1 ? "Task" : "Tasks"}</h3>
         {/if}
     {/if}
     <ul>

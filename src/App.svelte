@@ -4,7 +4,7 @@
 </script>
 
 <section class="section columns is-centered">
-    <div class="container column is-one-third">
+    <div class="container content column is-one-third">
       <Router {routes} />
     </div>
 </section>

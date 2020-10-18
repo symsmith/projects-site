@@ -1,4 +1,7 @@
 <script>
+    import {metatags} from '@sveltech/routify';
+    metatags.title = 'To-do';
+
     let currentValue = '';
     let tasks = [];
     $: numberUnchecked = tasks.filter(task => task.checked === false).length;

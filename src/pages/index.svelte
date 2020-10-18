@@ -1,3 +1,8 @@
+<script>
+    import {metatags} from '@sveltech/routify';
+    metatags.title = "Projects";
+</script>
+
 <h1 class="title">Projects</h1>
 
 <ul>

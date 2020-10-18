@@ -50,7 +50,7 @@
                     bind:value={currentValue}>
             </div>
         </div>
-        <div class="field level">
+        <div class="field level is-mobile">
             <div class="control level-left">
                 <button
                     class="button is-primary"

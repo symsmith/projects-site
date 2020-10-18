@@ -43,6 +43,7 @@
                 <input
                     class="input is-fullwidth"
                     required
+                    autofocus
                     type="text"
                     name="newtask"
                     id="newtask"

@@ -35,36 +35,61 @@
     }
 </script>
 
-<h1>To-do</h1>
-<form>
-    <input required type="text" name="newtask" id="newtask" placeholder="New Task" bind:value={currentValue}>
-    <br>
-    <button
-        type="submit"
-        on:click|preventDefault={addTask}
-        disabled={currentValue === ""}>Add</button>
-    <button
-        on:click|preventDefault={removeAllChecked}
-        disabled={numberChecked === 0}>Remove selected tasks</button>
-</form>
+<div class="container">
+    <h1 class="title">To-do</h1>
+    <form>
+        <div class="field">
+            <div class="control">
+                <input
+                    class="input is-fullwidth"
+                    required
+                    type="text"
+                    name="newtask"
+                    id="newtask"
+                    placeholder="New Task"
+                    bind:value={currentValue}>
+            </div>
+        </div>
+        <div class="field level">
+            <div class="control level-left">
+                <button
+                    class="button is-primary"
+                    on:click|preventDefault={addTask}
+                    disabled={currentValue === ""}>
+                    Add
+                </button>
+            </div>
+            <div class="control level-right">
+                <button
+                    class="button"
+                    on:click|preventDefault={removeAllChecked}
+                    disabled={numberChecked === 0}>
+                    Remove selected tasks
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 
-{#if tasks.length === 0}
-    <p>No task yet…</p>
-{:else}
-    {#if numberUnchecked === 0}
-        <h2>All done!</h2>
+<div class="section">
+    {#if tasks.length === 0}
+        <h2 class="subtitle">No task yet…</h2>
     {:else}
-        <h2>{numberUnchecked} {numberUnchecked === 1 ? "Task" : "Tasks"}</h2>
+        {#if numberUnchecked === 0}
+            <h2 class="subtitle">All done!</h2>
+        {:else}
+            <h2 class="subtitle">{numberUnchecked} {numberUnchecked === 1 ? "Task" : "Tasks"}</h2>
+        {/if}
     {/if}
-{/if}
-<ul>
-{#each tasks as {id, value, checked}}
-    <li on:click={checkTask(id)}>
-        <span class="check">{checked ? "☑" : ""}</span> 
-        <span style={checked ? "text-decoration: line-through" : ""}>{value}</span>
-    </li> 
-{/each}
-</ul>
+    <ul>
+    {#each tasks as {id, value, checked}}
+        <li on:click={checkTask(id)}>
+            <span class="check icon">{checked ? "☑" : ""}</span> 
+            <span style={checked ? "text-decoration: line-through" : ""}>{value}</span>
+        </li> 
+    {/each}
+    </ul>
+</div>
 
 <style>
     input {
@@ -81,6 +106,7 @@
         margin: 3px;
         position: relative;
         right: 5px;
+        top: 1px;
     }
 
     @font-face {

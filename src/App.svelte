@@ -3,6 +3,8 @@
 	import { routes } from "@sveltech/routify/tmp/routes";
 </script>
 
-<main>
-<Router {routes} />
-</main>
+<section class="section columns is-centered">
+    <div class="container column is-one-third">
+      <Router {routes} />
+    </div>
+</section>

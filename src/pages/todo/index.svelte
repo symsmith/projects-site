@@ -2,10 +2,11 @@
     import {metatags} from '@sveltech/routify';
     metatags.title = 'To-do';
 
+    import {tasks} from './store.js';
+
     let currentValue = '';
-    let tasks = [];
-    $: numberUnchecked = tasks.filter(task => task.checked === false).length;
-    $: numberChecked = tasks.length - numberUnchecked
+    $: numberUnchecked = $tasks.filter(task => task.checked === false).length;
+    $: numberChecked = $tasks.length - numberUnchecked
 
     function findIdByAttr(arr, attr, value) {
         let i = arr.length;
@@ -21,20 +22,20 @@
     }
     function addTask(e) {
         if (currentValue !== '') {
-            let n = tasks.length;
-            let lastId = n === 0 ? -1 : tasks[0].id;
-            tasks.unshift({id: lastId + 1, value: currentValue, checked: false});
-            tasks = tasks;
+            let n = $tasks.length;
+            let lastId = n === 0 ? -1 : $tasks[0].id;
+            $tasks.unshift({id: lastId + 1, value: currentValue, checked: false});
+            $tasks = $tasks;
             currentValue = '';
         }
     }
     function checkTask(i) {
-        let idInArray = findIdByAttr(tasks, 'id', i);
-        tasks[idInArray].checked = !tasks[idInArray].checked;
-        tasks = tasks;
+        let idInArray = findIdByAttr($tasks, 'id', i);
+        $tasks[idInArray].checked = !$tasks[idInArray].checked;
+        $tasks = $tasks;
     }
     function removeAllChecked() {
-        tasks = tasks.filter(task => task.checked === false);
+        $tasks = $tasks.filter(task => task.checked === false);
     }
 </script>
 
@@ -76,7 +77,7 @@
 </div>
 
 <div class="section">
-    {#if tasks.length === 0}
+    {#if $tasks.length === 0}
         <h3 class="subtitle">No task yet…</h3>
     {:else}
         {#if numberUnchecked === 0}
@@ -86,7 +87,7 @@
         {/if}
     {/if}
     <ul>
-    {#each tasks as {id, value, checked}}
+    {#each $tasks as {id, value, checked}}
         <li on:click={checkTask(id)}>
             <span class="check icon">{checked ? "☑" : ""}</span> 
             <span style={checked ? "text-decoration: line-through" : ""}>{value}</span>

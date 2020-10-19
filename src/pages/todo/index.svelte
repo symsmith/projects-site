@@ -88,9 +88,9 @@
     <ul>
     {#each $tasks as {id, value, checked}}
         <li on:click={checkTask(id)}>
-            <span class="check icon">{checked ? "☑" : ""}</span> 
+            <span class="check icon">{checked ? "☑" : ""}</span>
             <span style={checked ? "text-decoration: line-through" : ""}>{value}</span>
-        </li> 
+        </li>
     {/each}
     </ul>
 </div>

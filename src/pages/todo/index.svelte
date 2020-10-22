@@ -12,8 +12,8 @@
         let i = arr.length;
         let found;
         while(i--){
-            if( arr[i] 
-                && arr[i].hasOwnProperty(attr) 
+            if( arr[i]
+                && arr[i].hasOwnProperty(attr)
                 && (arguments.length > 2 && arr[i][attr] === value ) ) {
                     found = i;
             }

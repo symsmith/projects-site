@@ -3,10 +3,12 @@
 
     $: numberUnchecked = $tasks.filter(task => task.checked === false).length;
 
+    function toggleAll() {
+        for (let task of $tasks) {
+            task.checked = (numberUnchecked === 0) ? false : true;
         }
-        return found;
+        $tasks = $tasks;
     }
-
 </script>
 
 <div class="section">
@@ -18,6 +20,12 @@
         {:else}
             <h3 class="subtitle">{numberUnchecked} {numberUnchecked === 1 ? "Task" : "Tasks"}</h3>
         {/if}
+    {/if}
+    {#if $tasks.length > 0}
+        <label class="checkbox" for="task-all">
+            <input on:click={e => toggleAll()} checked={numberUnchecked === 0} id="task-all" type="checkbox">
+            <span><strong>Check all</strong></span>
+        </label>
     {/if}
     {#each $tasks as {id, value, checked}}
         <label class="checkbox" for="task-{id}">

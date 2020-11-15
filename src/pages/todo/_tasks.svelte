@@ -3,23 +3,10 @@
 
     $: numberUnchecked = $tasks.filter(task => task.checked === false).length;
 
-    function findIdByAttr(arr, attr, value) {
-        let i = arr.length;
-        let found;
-        while(i--){
-            if( arr[i]
-                && arr[i].hasOwnProperty(attr)
-                && (arguments.length > 2 && arr[i][attr] === value ) ) {
-                    found = i;
-            }
         }
         return found;
     }
-    function checkTask(i) {
-        let idInArray = findIdByAttr($tasks, 'id', i);
-        $tasks[idInArray].checked = !$tasks[idInArray].checked;
-        $tasks = $tasks;
-    }
+
 </script>
 
 <div class="section">

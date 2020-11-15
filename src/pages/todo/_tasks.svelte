@@ -23,7 +23,7 @@
     {/if}
     {#if $tasks.length > 0}
         <label class="checkbox" for="task-all">
-            <input on:click={e => toggleAll()} checked={numberUnchecked === 0} id="task-all" type="checkbox">
+            <input on:click={toggleAll} checked={numberUnchecked === 0} id="task-all" type="checkbox">
             <span><strong>Check all</strong></span>
         </label>
     {/if}

@@ -32,36 +32,22 @@
             <h3 class="subtitle">{numberUnchecked} {numberUnchecked === 1 ? "Task" : "Tasks"}</h3>
         {/if}
     {/if}
-    <ul>
     {#each $tasks as {id, value, checked}}
-        <li on:click={checkTask(id)}>
-            <span class="check icon">{checked ? "☑" : ""}</span>
+        <label class="checkbox" for="task-{id}">
+            <input bind:checked={checked} id="task-{id}" type="checkbox">
             <span style={checked ? "text-decoration: line-through" : ""}>{value}</span>
-        </li>
+        </label>
     {/each}
-    </ul>
 </div>
 
 <style>
-    ul {
-        list-style-type: none;
+    label {
+        display: block;
+        margin-bottom: 10px;
+        word-break: break-all;
     }
 
-    .check {
-        cursor: pointer;
-        font-family: "todo-font";
-        margin: 3px;
-        position: relative;
-        right: 5px;
-        top: 1px;
-    }
-
-    @font-face {
-        font-family: "todo-font";
-        src: url("/font/todo-font.ttf") format("ttf"),
-             url("/font/todo-font.woff") format("woff"),
-             url("/font/todo-font.eot") format("eot"),
-             url("/font/todo-font.svg") format("svg"),
-             url("/font/todo-font.woff2") format("woff2");
+    span {
+        padding-left: 10px;
     }
 </style>

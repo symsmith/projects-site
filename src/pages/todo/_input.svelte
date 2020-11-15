@@ -5,19 +5,6 @@
     $: numberUnchecked = $tasks.filter(task => task.checked === false).length;
     $: numberChecked = $tasks.length - numberUnchecked;
 
-    function findIdByAttr(arr, attr, value) {
-        let i = arr.length;
-        let found;
-        while(i--){
-            if( arr[i]
-                && arr[i].hasOwnProperty(attr)
-                && (arguments.length > 2 && arr[i][attr] === value ) ) {
-                    found = i;
-            }
-        }
-        return found;
-    }
-
     function addTask(e) {
         if (currentValue !== '') {
             let n = $tasks.length;
